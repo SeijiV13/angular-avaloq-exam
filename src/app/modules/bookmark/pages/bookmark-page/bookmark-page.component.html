@@ -1,1 +1,14 @@
-<p>bookmark-page works!</p>
+
+<button id="add-bookmark" mat-raised-button color="primary" (click)="addBookmark()">Add Bookmark</button>
+
+<div class="box">
+    <h2><mat-icon>bookmark</mat-icon> Bookmark List</h2>
+     <div *ngFor="let group of groups">
+         <h3>{{group}}</h3>
+         <hr>
+         <app-bookmark-item *ngFor="let data of bookmarks[group];" [name]="data.name" [url]="data.url" (actionEmitter)="executeAction($event, data.id)">
+
+         </app-bookmark-item>
+     </div>
+</div>
+<app-modal title="Create Modal" #appModal></app-modal>

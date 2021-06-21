@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-bookmark-item',
@@ -6,10 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./bookmark-item.component.scss']
 })
 export class BookmarkItemComponent implements OnInit {
-
+   @Input() name: string;
+   @Input() url: string;
+   @Output() actionEmitter = new EventEmitter();
   constructor() { }
 
   ngOnInit() {
+  }
+
+  emitAction(action) {
+    this.actionEmitter.emit({action});
   }
 
 }

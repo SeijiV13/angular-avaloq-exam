@@ -22,4 +22,12 @@ describe('BookmarkItemComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should emit action', () => {
+    component.actionEmitter.subscribe(data => {
+      expect(data).toEqual({action:'delete'});
+    });
+    component.emitAction('delete');
+    expect()
+  });
 });

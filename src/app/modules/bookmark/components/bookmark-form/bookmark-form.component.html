@@ -1,0 +1,30 @@
+<h3>
+    {{data.title}}
+</h3>
+<form [formGroup]="form"> 
+
+    <p>
+        <mat-form-field appearance="outline">
+                <mat-label>Name</mat-label>
+                <input formControlName="name" matInput placeholder="Placeholder">
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field appearance="outline">
+                <mat-label>URL</mat-label>
+                <input formControlName="url" matInput placeholder="Placeholder">
+        </mat-form-field>
+    </p>
+    
+    <p>
+        <mat-form-field appearance="outline">
+                <mat-label>Select</mat-label>
+                <mat-select formControlName="group" >
+                  <mat-option value="work">Work</mat-option>
+                  <mat-option value="personal">Personal</mat-option>
+                  <mat-option value="leisure">Leisure</mat-option>
+                </mat-select>
+         </mat-form-field>
+    </p>
+</form>
+<button id="add-bookmark" mat-raised-button color="primary" (click)="callAction()">Submit</button>
