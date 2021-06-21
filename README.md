@@ -41,13 +41,15 @@ my dum components are places
  1. Initial State - contains an array of bookmark property which will contain the list of bookmarks
 
  #### Create Bookmark - this will spread the list of bookmarks and add the new bookmark into a single array
- ``` on(BookmarkActions.createBookmark, (state, {bookmark}) => (
+ ```
+    on(BookmarkActions.createBookmark, (state, {bookmark}) => (
         { ...state, 
             bookmarks: [...state.bookmarks, bookmark]
   ```
 
  ### Delete Bookmark - this will filter out the bookmark with the passed guid
-  ```on(BookmarkActions.deleteBookmark, (state, {index}) => (
+  ```
+    on(BookmarkActions.deleteBookmark, (state, {index}) => (
         { ...state, 
             bookmarks: state.bookmarks.filter(data => data.id != index)
         })),

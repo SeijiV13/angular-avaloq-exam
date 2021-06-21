@@ -6,6 +6,7 @@ import * as fromBookmark from '../../states/bookmark.reducer';
 import { MatCardModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatSelectModule, MatIconModule } from '@angular/material';
 import { ModalModule } from 'src/app/shared/modules/modal/modal.module';
 import { FormsModule, ReactiveFormsModule, FormGroup, FormBuilder } from '@angular/forms';
+import { of } from 'rxjs';
 describe('BookmarkPageComponent', () => {
   let component: BookmarkPageComponent;
   let fixture: ComponentFixture<BookmarkPageComponent>;
@@ -39,6 +40,14 @@ describe('BookmarkPageComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should add bookmark - addbookMark()', () => {
+    component.appModal = {
+      open: () => { return { componentInstance: { actionEmitter: of({action: 'delete'}) } } }
+    } as any;
+    component.addBookmark();
+  });
+
 
   it('should execute delete Action - executeAction()', () => {
     component.executeAction({action: 'delete',form: new FormBuilder().group({name: [''], password: ['']})}, 0);
