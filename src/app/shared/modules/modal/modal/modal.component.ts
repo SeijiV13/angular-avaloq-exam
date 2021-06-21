@@ -14,7 +14,7 @@ export class ModalComponent implements OnInit {
   }
 
   open(component, action, title) {
-    this.dialog.open(component, {
+    return this.dialog.open(component, {
       data: { action, title },
     });
   }

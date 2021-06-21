@@ -4,7 +4,9 @@ import { ModalComponent } from 'src/app/shared/modules/modal/modal/modal.compone
 import { BookmarkFormComponent } from '../../components/bookmark-form/bookmark-form.component';
 import { Store } from '@ngrx/store';
 import * as fromBookmark from '../../states';
-import { deleteBookmark } from '../../states/bookmark.actions';
+import { deleteBookmark, createBookmark } from '../../states/bookmark.actions';
+import { GuidUtility } from 'src/app/shared/utilities/guid.utility';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-bookmark-page',
@@ -14,6 +16,7 @@ import { deleteBookmark } from '../../states/bookmark.actions';
 export class BookmarkPageComponent implements OnInit {
   bookmarks: Array<Bookmark> = [];
   groups: string[];
+  guid = new GuidUtility();
   @ViewChild('appModal') appModal: ModalComponent;
   constructor(private store: Store) { }
 
@@ -48,13 +51,23 @@ export class BookmarkPageComponent implements OnInit {
 
   // call modal add bookmark
   addBookmark() {
-     this.appModal.open(BookmarkFormComponent, 'add', "Add Bookmark");
+     const dialog = this.appModal.open(BookmarkFormComponent, 'add', 'Add Bookmark');
+     (dialog.componentInstance as any).actionEmitter.subscribe(data => {
+         this.executeAction(data)
+     });
   }
 
-  executeAction(event: {action: string}, index: number) {
+  executeAction(event: {action: string, form: FormGroup}, index: number = 0) {
 
     if(event.action === 'delete') {
       this.store.dispatch(deleteBookmark({index}));
+    }
+
+    else if(event.action === 'add') {
+      const bookmark: Bookmark = event.form.getRawValue();
+      bookmark.id = this.guid.createGuid().toString();
+      this.store.dispatch(createBookmark({bookmark}));
+      event.form.reset();
     }
   }
 

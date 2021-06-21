@@ -1,10 +1,6 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { createBookmark } from '../../states/bookmark.actions';
+import { Component, OnInit, Inject, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Bookmark } from 'src/app/shared/models/bookmark.model';
 import { MAT_DIALOG_DATA } from '@angular/material';
-import { GuidUtility } from 'src/app/shared/utilities/guid.utility';
 
 @Component({
   selector: 'app-bookmark-form',
@@ -13,8 +9,8 @@ import { GuidUtility } from 'src/app/shared/utilities/guid.utility';
 })
 export class BookmarkFormComponent implements OnInit {
   form: FormGroup;
-  guid = new GuidUtility();
-  constructor(private store: Store, private fb: FormBuilder,
+  @Output() actionEmitter = new EventEmitter();
+  constructor( private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: {action: string, title: string}
     ) { }
 
@@ -33,10 +29,7 @@ export class BookmarkFormComponent implements OnInit {
 
   callAction() {
      if(this.form.valid) {
-       const bookmark: Bookmark = this.form.getRawValue();
-       bookmark.id = this.guid.createGuid().toString();
-       this.store.dispatch(createBookmark({bookmark}));
-       this.form.reset();
+       this.actionEmitter.emit({action: 'add', form: this.form});
      }
   }
 

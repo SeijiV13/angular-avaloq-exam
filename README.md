@@ -1,27 +1,30 @@
-# AngularExam
+# AngularAvaloqExam
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.2.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+To run the application execute the command `npm run start` and navigate to `http://localhost:4200`
 
-## Code scaffolding
+## Solution for the Exam
+I have created a bookmark module that contains the store feature for bookmark, I made a spearate module such that
+it should be ready for lazy loading
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+I've used the concep of smart dumb compoentns where I hage the pages folder where my smart component is placed and components folder where
+my dum components are places
 
-## Running unit tests
+Smart Components
+1. bookmark-page.component
+   this contains all dispatching of actions such that this is the only component that communicates with the state
+   it dispatches the create and delete bookmark depending on the action passed
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+   it also gets the list of created bookmarks in the state using a feature selector
 
-## Running end-to-end tests
+Dumb Components
+1. bookmark-item.component
+   this display a single bookmark item that has a @Input Decorator for title name and group
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+2. bookmark-form.component
+   this holds the main form of creating the bookmark, it only emits to the parent to notify the smart componet if it needs to dispatch a createBookmark action

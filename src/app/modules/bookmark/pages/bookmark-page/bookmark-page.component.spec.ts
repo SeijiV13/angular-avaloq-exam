@@ -5,7 +5,7 @@ import { StoreModule } from '@ngrx/store';
 import * as fromBookmark from '../../states/bookmark.reducer';
 import { MatCardModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatSelectModule, MatIconModule } from '@angular/material';
 import { ModalModule } from 'src/app/shared/modules/modal/modal.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, FormGroup, FormBuilder } from '@angular/forms';
 describe('BookmarkPageComponent', () => {
   let component: BookmarkPageComponent;
   let fixture: ComponentFixture<BookmarkPageComponent>;
@@ -41,11 +41,11 @@ describe('BookmarkPageComponent', () => {
   });
 
   it('should execute delete Action - executeAction()', () => {
-    component.executeAction({action: 'delete'}, 0);
+    component.executeAction({action: 'delete',form: new FormBuilder().group({name: [''], password: ['']})}, 0);
   });
 
   it('should not execute delete Action - executeAction()', () => {
-    component.executeAction({action: 'add'}, 0);
+    component.executeAction({action: 'add', form: new FormBuilder().group({name: [''], password: ['']})}, 0);
   });
 
   it('should group array by keys - groupBy()', () => {
