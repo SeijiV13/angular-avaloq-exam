@@ -4,7 +4,7 @@ import { ModalComponent } from 'src/app/shared/modules/modal/modal/modal.compone
 import { BookmarkFormComponent } from '../../components/bookmark-form/bookmark-form.component';
 import { Store } from '@ngrx/store';
 import * as fromBookmark from '../../states';
-import { deleteBookmark, createBookmark } from '../../states/bookmark.actions';
+import { deleteBookmark, createBookmark, setBookmarks } from '../../states/bookmark.actions';
 import { GuidUtility } from 'src/app/shared/utilities/guid.utility';
 import { FormGroup } from '@angular/forms';
 
@@ -21,16 +21,37 @@ export class BookmarkPageComponent implements OnInit {
   constructor(private store: Store) { }
 
   ngOnInit() {
-    this.getBookmarks();
+    this.persistBookmark();
   }
 
   // will dusplay all the bookmarks
   getBookmarks() {
     this.store.select(fromBookmark.selectBookmarks).subscribe((data) => {
-      this.bookmarks = this.groupBy(data, 'group');
-      this.groups = this.getGroups();
-      // this.bookmarks = data;
+      if(data){
+        this.saveToStorage(data);
+      }
+      this.groupBookmarks(data);
+
     });
+  }
+
+  groupBookmarks(data: Bookmark[]) {
+    this.bookmarks = this.groupBy(data, 'group');
+    this.groups = this.getGroups();
+  }
+
+  persistBookmark() {
+    const bookmarks = localStorage.getItem('bookmarks');
+    if(JSON.parse(bookmarks) && JSON.parse(bookmarks).length > 0) {
+      this.store.dispatch(setBookmarks(JSON.parse(bookmarks)));
+      this.groupBookmarks(JSON.parse(bookmarks));
+    } else {
+      this.getBookmarks();
+    }
+  }
+
+  saveToStorage(data: Bookmark[]) {
+    localStorage.setItem('bookmarks', JSON.stringify(data));
   }
 
   getGroups() {

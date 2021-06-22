@@ -1,8 +1,12 @@
 
-<button id="add-bookmark" mat-raised-button color="primary" (click)="addBookmark()">Add Bookmark</button>
+<button id="add-bookmark" mat-raised-button color="primary" (click)="addBookmark()"><mat-icon>add</mat-icon> Add Bookmark</button>
 
 <div class="box">
     <h2><mat-icon>bookmark</mat-icon> Bookmark List</h2>
+    
+    <div *ngIf="groups.length < 1" class="alert">
+        <span>No Bookmarks Found</span>
+    </div>
      <div *ngFor="let group of groups">
          <h3>{{group}}</h3>
          <hr>

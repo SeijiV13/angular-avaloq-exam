@@ -10,3 +10,8 @@ export const deleteBookmark = createAction(
     '[Bookmark] Delete Bookmark',
     props<{index: number}>()
 )
+
+export const setBookmarks = createAction(
+  '[Bookmark] Set Bookmarks',
+  props<{bookmarks: Bookmark[]}>()
+)

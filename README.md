@@ -10,10 +10,34 @@ To run the application execute the command `npm run start` and navigate to `http
 I have created a bookmark module that contains the store feature for bookmark, I made a spearate module such that
 it should be ready for lazy loading
 
+```
+@NgModule({
+  declarations: [BookmarkPageComponent, BookmarkItemComponent, BookmarkFormComponent],
+  imports: [
+    // Routes
+    BookmarkoutingModule,
+    CommonModule,
+    // Material Modules
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatSelectModule,
+    MatIconModule,
+    //Shared Module
+    ModalModule,
+    //Forms Module
+    FormsModule,
+    ReactiveFormsModule,
+    //Store
+    StoreModule.forFeature(fromBookmark.bookmarkFeatureKey, fromBookmark.reducer)
+  ]
+})
+export class BookmarkModule { }
+```
 
-
-I've used the concep of smart dumb compoentns where I hage the pages folder where my smart component is placed and components folder where
-my dum components are places
+I've used the concept of smart dumb compoents where I created the pages folder where my smart component is placed and components folder where
+my dumb components are placed
 
 ### Smart Components
 1. bookmark-page.component

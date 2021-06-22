@@ -32,12 +32,16 @@ describe('BookmarkPageComponent', () => {
   }));
 
   beforeEach(() => {
+    localStorage.setItem('bookmarks', JSON.stringify([]));
     fixture = TestBed.createComponent(BookmarkPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
   it('should create', () => {
+    const test = [{name: 'test', group: 1}]
+    localStorage.setItem('bookmarks', JSON.stringify(test));
+    component.ngOnInit();
     expect(component).toBeTruthy();
   });
 

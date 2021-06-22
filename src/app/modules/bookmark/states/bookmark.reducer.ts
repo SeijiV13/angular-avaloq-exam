@@ -21,6 +21,10 @@ const bookmarkReducer = createReducer(
         { ...state, 
             bookmarks: state.bookmarks.filter(data => data.id != index)
         })),
+    on(BookmarkActions.setBookmarks, (state, {bookmarks}) => (
+        { ...state, 
+                bookmarks
+        })),
 
 
 );
