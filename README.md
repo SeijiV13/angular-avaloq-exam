@@ -80,7 +80,7 @@ my dumb components are placed
   ```
 
   ### List of bookmarks
-  ![Alt text](./assets/readme/images/bookmark-list.png "Title")
+  ![List of bookmarks](./src//assets/readme/images/bookmark-list.png "Title")
 
   ### Add bookmark modal
-  ![Alt text](./assets/readme/images/bookmark-add.png "Title")
+  ![Add bookmark modal](./src/assets/readme/images/bookmark-add.png "Title")
