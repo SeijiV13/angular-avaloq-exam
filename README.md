@@ -78,3 +78,9 @@ my dumb components are placed
             bookmarks: state.bookmarks.filter(data => data.id != index)
         })),
   ```
+
+  ### List of bookmarks
+  ![Alt text](./assets/readme/images/bookmark-list.png "Title")
+
+  ### Add bookmark modal
+  ![Alt text](./assets/readme/images/bookmark-add.png "Title")
